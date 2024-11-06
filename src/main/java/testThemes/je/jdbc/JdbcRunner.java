@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +32,9 @@ public class JdbcRunner {
 				System.out.println(result.getString("passanger_name"));
 				System.out.println(result.getObject("id"));
 		}
-		System.out.println(getTicketsByFlightId(8L));;
+		System.out.println(getTicketsByFlightId(8L));
+		System.out.println(getFlightsBetween(LocalDate.of(2020, 04, 01).atStartOfDay(),
+				LocalDate.of(2020, 05, 01).atStartOfDay()));
 	}
 	
 	public static List<Long> getTicketsByFlightId(Long flightId) {
@@ -46,6 +51,24 @@ public class JdbcRunner {
 			e.printStackTrace();
 		}
 		return tickets;
+	}
+	
+	public static List<Long> getFlightsBetween(LocalDateTime start, LocalDateTime end) {
+		List<Long> flights = new ArrayList<Long>();
+		String sql = "SELECT * FROM flight WHERE departure_date BETWEEN ? AND ?";
+		try (Connection connection = ConnectionManager.open();
+			PreparedStatement statement = connection.prepareStatement(sql)) {
+			
+			statement.setTimestamp(1, Timestamp.valueOf(start));
+			statement.setTimestamp(2, Timestamp.valueOf(end));
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				flights.add(result.getLong("id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flights;
 	}
 
 }
