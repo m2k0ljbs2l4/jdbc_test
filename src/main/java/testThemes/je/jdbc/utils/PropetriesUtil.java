@@ -22,4 +22,9 @@ public final class PropetriesUtil {
 	public static String get(String key) {
 		return PROPERTIES.getProperty(key);
 	}
+	
+	private PropetriesUtil() {
+		
+	}
+	
 }
