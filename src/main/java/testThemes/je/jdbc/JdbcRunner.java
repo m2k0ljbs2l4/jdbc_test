@@ -1,6 +1,7 @@
 package testThemes.je.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,14 +29,16 @@ public class JdbcRunner {
 				System.out.println(result.getString("passanger_name"));
 				System.out.println(result.getObject("id"));
 		}
+		System.out.println(getTicketsByFlightId(8L));;
 	}
 	
 	public static List<Long> getTicketsByFlightId(Long flightId) {
 		List<Long> tickets = new ArrayList<Long>();
-		String sql = "SELECT * FROM ticket WHERE flight_id = %s".formatted(flightId);
+		String sql = "SELECT * FROM ticket WHERE flight_id = ?";
 		try (Connection connection = ConnectionManager.open();
-				Statement statement = connection.createStatement()) {
-			ResultSet result = statement.executeQuery(sql);
+				PreparedStatement statement = connection.prepareStatement(sql)) {
+			statement.setLong(1, flightId);
+			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				tickets.add(result.getLong("id"));
 			}
