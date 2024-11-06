@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import testThemes.je.jdbc.utils.ConnectionManager;
+
 public class JdbcRunner {
 
 	public static void main(String[] args) throws SQLException {
-		String url = "jdbc:postgresql://localhost:5432/postgres";
-		String username = "postgres";
-		String password = "aboba";
-		try (Connection connection = DriverManager.getConnection(url, username, password)) {
+
+		try (Connection connection = ConnectionManager.open()) {
 			System.out.println(connection.getTransactionIsolation());;
 		}
 	}
