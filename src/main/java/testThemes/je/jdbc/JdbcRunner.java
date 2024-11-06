@@ -11,6 +11,7 @@ public class JdbcRunner {
 	public static void main(String[] args) throws SQLException {
 		
 		String sql = "create schema game; ";
+//		String sql = "drop schema game; ";
 
 		try (Connection connection = ConnectionManager.open(); 
 				Statement statement = connection.createStatement()) {
