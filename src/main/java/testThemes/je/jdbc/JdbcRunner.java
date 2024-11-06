@@ -11,7 +11,7 @@ public class JdbcRunner {
 		String username = "postgres";
 		String password = "aboba";
 		try (Connection connection = DriverManager.getConnection(url, username, password)) {
-			connection.getTransactionIsolation();
+			System.out.println(connection.getTransactionIsolation());;
 		}
 	}
 
