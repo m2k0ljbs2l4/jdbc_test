@@ -21,7 +21,7 @@ public class JdbcRunner {
 		String sqlQuery = "SELECT * FROM ticket;";
 //		String sql = "DROP SCHEMA game; ";
 
-		try (Connection connection = ConnectionManager.open(); 
+		try (Connection connection = ConnectionManager.get(); 
 				Statement statement = connection.createStatement()) {
 			System.out.println(statement.execute(sql));
 			ResultSet result = statement.executeQuery(sqlQuery);
@@ -40,7 +40,7 @@ public class JdbcRunner {
 	public static List<Long> getTicketsByFlightId(Long flightId) {
 		List<Long> tickets = new ArrayList<Long>();
 		String sql = "SELECT * FROM ticket WHERE flight_id = ?";
-		try (Connection connection = ConnectionManager.open();
+		try (Connection connection = ConnectionManager.get();
 				PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setLong(1, flightId);
 			ResultSet result = statement.executeQuery();
@@ -56,7 +56,7 @@ public class JdbcRunner {
 	public static List<Long> getFlightsBetween(LocalDateTime start, LocalDateTime end) {
 		List<Long> flights = new ArrayList<Long>();
 		String sql = "SELECT * FROM flight WHERE departure_date BETWEEN ? AND ?";
-		try (Connection connection = ConnectionManager.open();
+		try (Connection connection = ConnectionManager.get();
 			PreparedStatement statement = connection.prepareStatement(sql)) {
 			
 			statement.setTimestamp(1, Timestamp.valueOf(start));
