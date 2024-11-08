@@ -3,90 +3,79 @@ package testThemes.je.jdbc.entity;
 import java.math.BigDecimal;
 
 public class Ticket {
-	private Long id;
-	private String passportNo;
-	private String passangerName;
-	private Long flightId;
-	private String seatNo;
-	private BigDecimal cost;
-	
-	
-	public Ticket(Long id, String passportNo, String passangerName, Long flightId, String seatNo, BigDecimal cost) {
-		this.id = id;
-		this.passportNo = passportNo;
-		this.passangerName = passangerName;
-		this.flightId = flightId;
-		this.seatNo = seatNo;
-		this.cost = cost;
-	}
+    private Long id;
+    private String passangerNo;
+    private String passangerName;
+    private Flight flight;
+    private String seatNo;
+    private BigDecimal cost;
 
+    public Ticket(Long id, String passangerNo, String passangerName, Flight flight, String seatNo, BigDecimal cost) {
+        this.id = id;
+        this.passangerNo = passangerNo;
+        this.passangerName = passangerName;
+        this.flight = flight;
+        this.seatNo = seatNo;
+        this.cost = cost;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getPassangerNo() {
+        return passangerNo;
+    }
 
+    public void setPassangerNo(String passangerNo) {
+        this.passangerNo = passangerNo;
+    }
 
-	public String getPassportNo() {
-		return passportNo;
-	}
+    public String getPassangerName() {
+        return passangerName;
+    }
 
+    public void setPassangerName(String passangerName) {
+        this.passangerName = passangerName;
+    }
 
-	public void setPassportNo(String passportNo) {
-		this.passportNo = passportNo;
-	}
+    public Flight getFlight() {
+        return flight;
+    }
 
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
 
-	public String getPassangerName() {
-		return passangerName;
-	}
+    public String getSeatNo() {
+        return seatNo;
+    }
 
+    public void setSeatNo(String seatNo) {
+        this.seatNo = seatNo;
+    }
 
-	public void setPassangerName(String passangerName) {
-		this.passangerName = passangerName;
-	}
+    public BigDecimal getCost() {
+        return cost;
+    }
 
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
 
-	public Long getFlightId() {
-		return flightId;
-	}
-
-
-	public void setFlightId(Long flightId) {
-		this.flightId = flightId;
-	}
-
-
-	public String getSeatNo() {
-		return seatNo;
-	}
-
-
-	public void setSeatNo(String seatNo) {
-		this.seatNo = seatNo;
-	}
-
-
-	public BigDecimal getCost() {
-		return cost;
-	}
-
-
-	public void setCost(BigDecimal cost) {
-		this.cost = cost;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Ticket [id=" + id + ", passportNo=" + passportNo + ", passangerName=" + passangerName + ", flightId="
-				+ flightId + ", seatNo=" + seatNo + ", cost=" + cost + "]";
-	}
-
-	
-	
+    @Override
+    public String toString() {
+        return "Ticket{" +
+               "id=" + id +
+               ", passangerNo='" + passangerNo + '\'' +
+               ", passangerName='" + passangerName + '\'' +
+               ", flightId=" + flight +
+               ", seatNo='" + seatNo + '\'' +
+               ", cost=" + cost +
+               '}';
+    }
 }
